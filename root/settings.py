@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
     "users",
     "testapp",
+    "hackathon",
 ]
 
 
@@ -85,6 +86,16 @@ AUTHENTICATION_BACKENDS = [
     "graphql_auth.backends.GraphQLAuthBackend",
 ]
 
+GRAPHQL_AUTH = {
+    "REGISTER_MUTATION_FIELDS": {
+        "email": "String",
+        "username": "String",
+        "first_name": "String",
+        "last_name": "String",
+    },
+}
+
+
 GRAPHQL_JWT = {
     "JWT_VERIFY_EXPIRATION": True,
     # optional
@@ -93,7 +104,7 @@ GRAPHQL_JWT = {
         "graphql_auth.mutations.Register",
         "graphql_auth.mutations.ObtainJSONWebToken",
     ],
-    "JWT_EXPIRATION_DELTA": timedelta(minutes=60),
+    "JWT_EXPIRATION_DELTA": timedelta(minutes=600),
 }
 
 ROOT_URLCONF = "root.urls"
@@ -126,6 +137,7 @@ DATABASES = {
     )
 }
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
